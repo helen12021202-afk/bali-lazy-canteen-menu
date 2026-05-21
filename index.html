@@ -763,18 +763,16 @@ body {
         </div>
 
         <!-- Category tabs -->
-        <div class="cat-tabs">
-          <div class="cat-tab active">精選</div>
-          <div class="cat-tab">咖哩系列</div>
-          <div class="cat-tab">義大利麵</div>
-          <div class="cat-tab">日式系列</div>
-          <div class="cat-tab">加購</div>
-          <div class="cat-tab">點心</div>
-          <div class="cat-tab">飲料</div>
+        <div class="cat-tabs" id="cat-tabs">
+          <div class="cat-tab active" onclick="scrollToSection('sec-featured', this)">精選</div>
+          <div class="cat-tab" onclick="scrollToSection('sec-curry', this)">咖哩系列</div>
+          <div class="cat-tab" onclick="scrollToSection('sec-pasta', this)">義大利麵</div>
+          <div class="cat-tab" onclick="scrollToSection('sec-japanese', this)">日式系列</div>
+          <div class="cat-tab" onclick="scrollToSection('sec-snack', this)">點心</div>
         </div>
 
         <!-- 精選商品 -->
-        <div class="menu-section">
+        <div class="menu-section" id="sec-featured">
           <div class="section-title">🔥 精選商品</div>
           <div class="h-scroll">
             <div class="h-card">
@@ -817,7 +815,7 @@ body {
         </div>
 
         <!-- 咖哩系列 -->
-        <div class="menu-section" style="border-top: 8px solid #f6f6f6">
+        <div class="menu-section" id="sec-curry" style="border-top: 8px solid #f6f6f6">
           <div class="section-title">🍛 咖哩系列</div>
           <div class="list-item">
             <div class="list-item-info">
@@ -878,7 +876,7 @@ body {
         </div>
 
         <!-- 義大利麵 -->
-        <div class="menu-section" style="border-top: 8px solid #f6f6f6">
+        <div class="menu-section" id="sec-pasta" style="border-top: 8px solid #f6f6f6">
           <div class="section-title">🍝 義大利麵系列</div>
           <div class="list-item">
             <div class="list-item-info">
@@ -939,7 +937,7 @@ body {
         </div>
 
         <!-- 日式系列 -->
-        <div class="menu-section" style="border-top: 8px solid #f6f6f6">
+        <div class="menu-section" id="sec-japanese" style="border-top: 8px solid #f6f6f6">
           <div class="section-title">🍱 日式系列</div>
           <div class="list-item">
             <div class="list-item-info">
@@ -1014,7 +1012,7 @@ body {
         </div>
 
         <!-- 點心 -->
-        <div class="menu-section" style="border-top: 8px solid #f6f6f6">
+        <div class="menu-section" id="sec-snack" style="border-top: 8px solid #f6f6f6">
           <div class="section-title">🍟 點心</div>
           <div class="list-item">
             <div class="list-item-info">
@@ -1220,5 +1218,36 @@ body {
 
 </div>
 
+
+<script>
+function scrollToSection(id, tabEl) {
+  // Update active tab styling
+  document.querySelectorAll('.cat-tab').forEach(function(t) { t.classList.remove('active'); });
+  tabEl.classList.add('active');
+
+  var section = document.getElementById(id);
+  if (!section) return;
+
+  // Walk up to find scroll-content parent
+  var node = section;
+  while (node && (!node.className || node.className.indexOf('scroll-content') === -1)) {
+    node = node.parentNode;
+  }
+  if (!node) return;
+
+  // Calculate how far section is from top of scroll-content
+  var offset = 0;
+  var el = section;
+  while (el && el !== node) {
+    offset += el.offsetTop;
+    el = el.offsetParent;
+    if (el === node) break;
+    // safety: if offsetParent escapes scroll-content, stop
+    if (!node.contains(el)) break;
+  }
+
+  node.scrollTop = offset - 60;
+}
+</script>
 </body>
 </html>
