@@ -2,7 +2,41 @@
 <html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<style>
+  .h-scroll {
+    -webkit-overflow-scrolling: touch !important;
+    overflow-x: scroll !important;
+    scroll-snap-type: x mandatory;
+  }
+  .h-card {
+    scroll-snap-align: start;
+  }
+  .scroll-content {
+    -webkit-overflow-scrolling: touch !important;
+    overflow-y: scroll !important;
+  }
+  /* Make phones stack on mobile */
+  @media (max-width: 900px) {
+    .phones {
+      flex-direction: column !important;
+      align-items: center !important;
+      padding: 24px 16px !important;
+      gap: 32px !important;
+    }
+    .phone {
+      width: 360px !important;
+      height: 780px !important;
+    }
+  }
+  @media (max-width: 400px) {
+    .phone {
+      width: 320px !important;
+      height: 700px !important;
+    }
+  }
+</style>
 <title>八里懶人食堂 — UE 菜單示意圖</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
